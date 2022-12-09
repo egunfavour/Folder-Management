@@ -8,5 +8,6 @@
         string GetAllFilesByFolderName(string folderName);
         string RenameFile(string filepath, string newfileName);
         string UpdateFileContent(string filepath, string newContent);
+        string DeleteAllFilesByFolderName(string FolderName, string folderPath);
     }
 }

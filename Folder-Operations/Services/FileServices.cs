@@ -18,14 +18,27 @@ namespace Folder_Operations.Services
                 File.Delete(filepath);
             return "sucessfully deleted";
         }
-        public string DeleteAllFileByFolderName()
-        {
-            return "";
-        }
-        public string GetAllFilesByFolderName(string folderName)
+        public string DeleteAllFilesByFolderName(string FolderName, string folderPath)
         {
             var files = Directory.GetFiles(rootPath, "*", SearchOption.TopDirectoryOnly);
-            return "";
+            if(File.Exists(folderPath))
+            {
+                foreach (var file in files)
+                {
+                    File.Delete(file);
+                    return "Deleted all files";
+                }
+            }
+            return "path does not exist";
+        }
+        public string GetAllFilesByFolderName(string folderpath)
+        {
+            var files = Directory.GetFiles(rootPath, "*", SearchOption.TopDirectoryOnly);
+            foreach (var fileName in files)
+            {
+                return fileName;
+            }
+            return "found";
         }
         public string GetAllFileContentByFilePath(string filepath)
         {

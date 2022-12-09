@@ -33,11 +33,11 @@ namespace Folder_Operations.Controllers
             return Ok(filePath + "successfully deleted");
         }
         [HttpPost]
-        [Route("delete-files-By-Folder-Id")]
-        public IActionResult DeleteAllFilesByFolderId()
+        [Route("delete-files-By-Folder-Name")]
+        public IActionResult DeleteAllFilesByFolderName(string folderName, string folderPath )
         {
-           
-            return null;
+            var fileNames = _fileServices.DeleteAllFilesByFolderName(folderName, folderPath);
+            return Ok(fileNames);
         }
 
         [HttpGet]

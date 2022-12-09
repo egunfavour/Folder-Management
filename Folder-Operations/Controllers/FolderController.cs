@@ -52,9 +52,10 @@ namespace Folder_Operations.Controllers
         }
         [HttpGet]
         [Route("get-all-sub-folders-by-folder-Id")]
-        public IActionResult GetAllSubFoldersByFolderId()
+        public IActionResult GetAllSubFoldersByFolderName(string folderPath)
         {
-            return null;
+          var folders = _folderServices.GetAllSubFoldersByFolderName(folderPath);
+           return Ok(folders);
         }
        
 

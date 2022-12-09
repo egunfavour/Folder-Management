@@ -126,9 +126,16 @@ namespace Folder_Operations.Services
             return Folds;
 
         }
-        public string GetAllSubFoldersByFolderName()
+        public string GetAllSubFoldersByFolderName(string folderPath)
         {
-            return "";
+
+            var files = Directory.GetFiles(rootPath, "*", SearchOption.TopDirectoryOnly);
+            foreach (var folderName in files)
+            {
+                return folderName;
+            }
+            return "found";
+            
         }
         public string RenameAllFolders(string FolderName, string FolderPath, string NewFolderName)
         {
