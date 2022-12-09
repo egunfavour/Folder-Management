@@ -1,4 +1,5 @@
-﻿using SautinSoft.Document;
+﻿using Folder_Operations.@interface;
+using SautinSoft.Document;
 
 namespace Folder_Operations.Services
 {
@@ -16,6 +17,10 @@ namespace Folder_Operations.Services
             if (File.Exists(filepath))
                 File.Delete(filepath);
             return "sucessfully deleted";
+        }
+        public string DeleteAllFileByFolderName()
+        {
+            return "";
         }
         public string GetAllFilesByFolderName(string folderName)
         {

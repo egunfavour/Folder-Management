@@ -7,7 +7,7 @@
         string DeleteFolder(string FolderName, string FolderPath);
         string DeleteSubFolderById(string SubFolderName, string FolderPath);
         List<string> GetAllFolders();
-        string GetAllSubFoldersByFolderId();
+        string GetAllSubFoldersByFolderName();
         string GetFoldersByName(string folderName);
         string RenameAllFolders(string FolderName, string FolderPath, string NewFolderName);
     }

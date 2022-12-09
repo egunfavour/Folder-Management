@@ -31,22 +31,19 @@ namespace Folder_Operations.Controllers
         
         [HttpPost]
         [Route("delete-folder")]
-        public IActionResult DeleteFolder()
+        public IActionResult DeleteFolder(string folderName, string folderPath)
         {
-            return null;
+            var newFolderName = _folderServices.DeleteFolder(folderName, folderPath);
+            return Ok(newFolderName + "successfully deleted");
         }
         [HttpPost]
         [Route("delete-sub-folders-by-Id")]
-        public IActionResult DeleteSubFolderById()
+        public IActionResult DeleteSubFolderById(string subFolderName, string folderPath)
         {
-            return null;
+            var newSubFolderName = _folderServices.DeleteSubFolderById(subFolderName, folderPath);
+            return Ok(newSubFolderName + "sucessfully deleted");
         }
-        [HttpPost]
-        [Route("delete-files-By-Folder-Id")]
-        public IActionResult DeleteFilesByFolderId()
-        {
-            return null;
-        }
+        
         [HttpGet]
         [Route("get-all-folders")]
         public IActionResult GetAllFolders()

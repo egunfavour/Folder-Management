@@ -32,31 +32,42 @@ namespace Folder_Operations.Controllers
             _fileServices.DeleteFiles(filePath);
             return Ok(filePath + "successfully deleted");
         }
+        [HttpPost]
+        [Route("delete-files-By-Folder-Id")]
+        public IActionResult DeleteAllFilesByFolderId()
+        {
+           
+            return null;
+        }
 
         [HttpGet]
         [Route("get-all-files-by-folder-id")]
-        public IActionResult GetAllFilesByFolderName()
+        public IActionResult GetAllFilesByFolderName(string folderName)
         {
-            return null;
+            var files = _fileServices.GetAllFilesByFolderName(folderName);
+            return Ok(files);
         }
 
         [HttpGet]
         [Route("get-all-content-by-file-Id")]
-        public IActionResult GetAllFileContentByFileName()
+        public IActionResult GetAllFileContentByFileName(string filepath)
         {
-            return null;
+            var fileContent = _fileServices.GetAllFileContentByFilePath(filepath);
+            return Ok(fileContent);
         }
         [HttpPost]
         [Route("update-file-content")]
-        public IActionResult UpdateFileContent()
+        public IActionResult UpdateFileContent(string Filepath, string newContent)
         {
-            return null;
+            var updatedContent = _fileServices.UpdateFileContent(Filepath, newContent);
+            return Ok(updatedContent);
         }
         [HttpPatch]
         [Route("rename-file")]
-        public IActionResult RenameFile()
+        public IActionResult RenameFile(string filepath, string newfileName)
         {
-            return null;
+            var newName = _fileServices.RenameFile(filepath, newfileName);
+            return Ok(newName);
         }
     }
 }

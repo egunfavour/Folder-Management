@@ -126,7 +126,7 @@ namespace Folder_Operations.Services
             return Folds;
 
         }
-        public string GetAllSubFoldersByFolderId()
+        public string GetAllSubFoldersByFolderName()
         {
             return "";
         }
