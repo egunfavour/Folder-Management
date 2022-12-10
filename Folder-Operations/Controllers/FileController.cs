@@ -44,7 +44,7 @@ namespace Folder_Operations.Controllers
         [Route("get-all-files-by-folder-Name")]
         public IActionResult GetAllFilesByFolderName(string folderPath)
         {
-            var files = _fileServices.GetAllFilesByFolderName(folderPath);
+            var files = _fileServices.GetAllFilesByFolderPath(folderPath);
             return Ok(files);
         }
 

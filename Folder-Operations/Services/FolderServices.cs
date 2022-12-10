@@ -22,14 +22,14 @@ namespace Folder_Operations.Services
                     return createdFolder.FullName;
                 }
                 var folder = Directory.CreateDirectory(Path.Combine(rootPath, path, name));
-                return folder.Name;
+                return folder.Name; 
             }
             catch (Exception ex)
             {
                 return (ex.Message);
             }
         }
-        public string CreateSubFoldersById(string FolderName, string newFolderName)
+        public string CreateSubFoldersByName(string FolderName, string newFolderName)
         {
             try
             {
@@ -54,25 +54,19 @@ namespace Folder_Operations.Services
         {
             try
             {
-                string siteHost = (_httpContextAccessor.HttpContext.Request.IsHttps ? "https" : "http") + "://" + _httpContextAccessor.HttpContext.Request.Host;
-                if (FolderPath == null) FolderPath = "";
-                if (FolderPath.Contains(siteHost))
+                if (Directory.Exists(FolderPath))
                 {
-                    int startIndex = siteHost.Length;
-                    string newPath = FolderPath.Substring(startIndex);
-                    FolderPath = rootPath + '/' + newPath;
-                    Directory.Delete(Path.Combine(FolderPath, FolderName), true);
-                    return (FolderName + " folder Successfully deleted.");
+                    Directory.Delete(FolderPath);
                 }
-                Directory.Delete(Path.Combine(rootPath, FolderPath, FolderName), true);
                 return (FolderName + " folder Successfully deleted.");
+            return "folder path does not exists";
             }
             catch (Exception ex)
             {
                 return (ex.Message);
             }
         }
-        public string DeleteSubFolderById(string SubFolderName, string FolderPath)
+        public string DeleteSubFolderByName(string SubFolderName, string FolderPath)
         {
             try
             {
@@ -94,28 +88,6 @@ namespace Folder_Operations.Services
                 return (ex.Message);
             }
         }
-
-        public string GetFoldersByName(string folderName)
-        {
-            try
-            {
-                if (folderName == null) folderName = "";
-                var file = Directory.GetDirectories(rootPath, folderName, SearchOption.AllDirectories);
-                List<string> Folds = new();
-                foreach (var i in file)
-                {
-                    int startIndex = rootPath.Length;
-                    Folds.Add((_httpContextAccessor.HttpContext.Request.IsHttps ? "https" : "http") + "://" + _httpContextAccessor.HttpContext.Request.Host + i.Substring(startIndex));
-                }
-                if (file.Length == 0)
-                    return "not found";
-                return "no folder found";
-            }
-            catch (Exception ex)
-            {
-                return (ex.Message);
-            }
-        }
         public List<string> GetAllFolders()
         {
             var file = Directory.GetDirectories(rootPath);
@@ -124,22 +96,20 @@ namespace Folder_Operations.Services
             {
                 int startIndex = rootPath.Length;
                 Folds.Add((_httpContextAccessor.HttpContext.Request.IsHttps ? "https" : "http") + "://" + _httpContextAccessor.HttpContext.Request.Host + i.Substring(startIndex));
-                return Folds;
             }
             return Folds;
 
         }
-        public string GetAllSubFoldersByFolderName(string folderPath)
+        public List<string> GetAllSubFoldersByFolderpath(string folderPath)
         {
-
-            var files = Directory.GetFiles(rootPath, "*", SearchOption.TopDirectoryOnly);
+            List<string> folders = new();
+            var files = Directory.GetDirectories(folderPath);
             foreach (var folderName in files)
             {
-                return folderName;
+                folders.Add(folderName);
             }
-            return "found";
-            
-        }
+            return folders;
+        }      
         public string RenameAllFolders(string FolderName, string FolderPath, string NewFolderName)
         {
             try
@@ -160,5 +130,6 @@ namespace Folder_Operations.Services
             }
         }
 
+        
     }
 }

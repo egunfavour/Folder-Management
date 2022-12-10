@@ -42,7 +42,7 @@ namespace Folder_Operations.Services
             }
             return "Folder path does not exist!";
         }
-        public List<string> GetAllFilesByFolderName(string folderpath)
+        public List<string> GetAllFilesByFolderPath(string folderpath)
         {
             List<string> fileList = new List<string>();
             var files = Directory.GetFiles(folderpath);
@@ -51,7 +51,7 @@ namespace Folder_Operations.Services
                 fileList.Add(fileName);
             }
             return fileList;
-            //return "found";
+           
         }
         public string GetAllFileContentByFilePath(string filepath)
         {

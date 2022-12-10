@@ -3,12 +3,11 @@
     public interface IFolderServices
     {
         string CreateFolder(string name, string path);
-        string CreateSubFoldersById(string FolderName, string SubFolderName);
+        string CreateSubFoldersByName(string FolderName, string newFolderName);
         string DeleteFolder(string FolderName, string FolderPath);
-        string DeleteSubFolderById(string SubFolderName, string FolderPath);
+        string DeleteSubFolderByName(string SubFolderName, string FolderPath);
         List<string> GetAllFolders();
-        string GetAllSubFoldersByFolderName(string folderPath);
-        string GetFoldersByName(string folderName);
+        List<string> GetAllSubFoldersByFolderpath(string folderPath);
         string RenameAllFolders(string FolderName, string FolderPath, string NewFolderName);
     }
 }

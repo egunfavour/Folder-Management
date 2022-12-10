@@ -24,7 +24,7 @@ namespace Folder_Operations.Controllers
         [Route("create-subfolder-by-id")]
         public IActionResult CreateSubFoldersById(string FolderName, string newFolderName)
         {
-            var folder = _folderServices.CreateSubFoldersById(FolderName, newFolderName);
+            var folder = _folderServices.CreateSubFoldersByName(FolderName, newFolderName);
             return Ok(folder);
 
         }
@@ -37,10 +37,10 @@ namespace Folder_Operations.Controllers
             return Ok(newFolderName);
         }
         [HttpPost]
-        [Route("delete-sub-folders-by-Id")]
-        public IActionResult DeleteSubFolderById(string subFolderName, string folderPath)
+        [Route("delete-sub-folders-by-Name")]
+        public IActionResult DeleteSubFolderByNamee(string subFolderName, string folderPath)
         {
-            var newSubFolderName = _folderServices.DeleteSubFolderById(subFolderName, folderPath);
+            var newSubFolderName = _folderServices.DeleteSubFolderByName(subFolderName, folderPath);
             return Ok(newSubFolderName);
         }
         
@@ -52,10 +52,10 @@ namespace Folder_Operations.Controllers
             return Ok(allFolders);
         }
         [HttpGet]
-        [Route("get-all-sub-folders-by-folder-name")]
-        public IActionResult GetAllSubFoldersByFolderName(string folderPath)
+        [Route("get-all-sub-folders-by-folder-path")]
+        public IActionResult GetAllSubFoldersByFolderPath(string folderPath)
         {
-          var folders = _folderServices.GetAllSubFoldersByFolderName(folderPath);
+          var folders = _folderServices.GetAllSubFoldersByFolderpath(folderPath);
            return Ok(folders);
         }
         [HttpGet]
@@ -65,10 +65,5 @@ namespace Folder_Operations.Controllers
             var Folder = _folderServices.RenameAllFolders(FolderName, FolderPath, NewFolderName);
             return Ok(Folder);
         }
-
-
-
-
-
     }
 }
