@@ -29,42 +29,47 @@ namespace Folder_Operations.Services
                 File.Delete(filepath);
             return "sucessfully deleted";
         }
-        public string DeleteAllFilesByFolderName(string FolderName, string folderPath)
+        public string DeleteAllFilesByFolderName(/* FolderName,*/ string folderPath)
         {
-            var files = Directory.GetFiles(rootPath, "*", SearchOption.TopDirectoryOnly);
-            if(File.Exists(folderPath))
+            if(Directory.Exists(folderPath))
             {
+                var files = Directory.GetFiles(folderPath);
                 foreach (var file in files)
                 {
                     File.Delete(file);
-                    return "Deleted all files";
                 }
+                return $"All files in {folderPath} deleted!";
             }
-            return "path does not exist";
+            return "Folder path does not exist!";
         }
-        public string GetAllFilesByFolderName(string folderpath)
+        public List<string> GetAllFilesByFolderName(string folderpath)
         {
-            var files = Directory.GetFiles(rootPath, "*", SearchOption.TopDirectoryOnly);
+            List<string> fileList = new List<string>();
+            var files = Directory.GetFiles(folderpath);
             foreach (var fileName in files)
             {
-                return fileName;
+                fileList.Add(fileName);
             }
-            return "found";
+            return fileList;
+            //return "found";
         }
         public string GetAllFileContentByFilePath(string filepath)
         {
             DocumentCore documentContent = DocumentCore.Load(filepath);
-            return documentContent.Content.ToString();
+            var content = documentContent.Content.ToString();
+            return content;
 
         }
+        //updates txt files.
         public string UpdateFileContent(string filepath, string newContent)
         {
             if (File.Exists(filepath))
             {
-                File.ReadAllText(filepath);
+                File.WriteAllText(filepath, newContent);
+                string content = File.ReadAllText(filepath);
+                return content;
             }
-            File.WriteAllText(filepath, newContent);
-            return newContent;
+            return "File does not exist!";
 
         }
         public string RenameFile(string filepath, string newfileName)

@@ -34,17 +34,17 @@ namespace Folder_Operations.Controllers
         }
         [HttpDelete]
         [Route("delete-all-files-By-Folder-Name")]
-        public IActionResult DeleteAllFilesByFolderName(string folderName, string folderPath )
+        public IActionResult DeleteAllFilesByFolderName(/*string folderName,*/ string folderPath )
         {
-            var fileNames = _fileServices.DeleteAllFilesByFolderName(folderName, folderPath);
+            var fileNames = _fileServices.DeleteAllFilesByFolderName(/*folderName,*/ folderPath);
             return Ok(fileNames);
         }
 
         [HttpGet]
         [Route("get-all-files-by-folder-Name")]
-        public IActionResult GetAllFilesByFolderName(string folderName)
+        public IActionResult GetAllFilesByFolderName(string folderPath)
         {
-            var files = _fileServices.GetAllFilesByFolderName(folderName);
+            var files = _fileServices.GetAllFilesByFolderName(folderPath);
             return Ok(files);
         }
 
