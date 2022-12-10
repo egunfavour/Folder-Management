@@ -22,42 +22,52 @@ namespace Folder_Operations.Controllers
         }
         [HttpPost]
         [Route("create-subfolder-by-id")]
-        public IActionResult CreateSubFoldersById(string FolderName, string SubFolderName)
+        public IActionResult CreateSubFoldersById(string FolderName, string newFolderName)
         {
-            var folder = _folderServices.CreateSubFoldersById(FolderName,SubFolderName);
+            var folder = _folderServices.CreateSubFoldersById(FolderName, newFolderName);
             return Ok(folder);
 
         }
         
-        [HttpPost]
+        [HttpDelete]
         [Route("delete-folder")]
         public IActionResult DeleteFolder(string folderName, string folderPath)
         {
             var newFolderName = _folderServices.DeleteFolder(folderName, folderPath);
-            return Ok(newFolderName + "successfully deleted");
+            return Ok(newFolderName);
         }
         [HttpPost]
         [Route("delete-sub-folders-by-Id")]
         public IActionResult DeleteSubFolderById(string subFolderName, string folderPath)
         {
             var newSubFolderName = _folderServices.DeleteSubFolderById(subFolderName, folderPath);
-            return Ok(newSubFolderName + "sucessfully deleted");
+            return Ok(newSubFolderName);
         }
         
         [HttpGet]
         [Route("get-all-folders")]
         public IActionResult GetAllFolders()
         {
-            return null;
+          var allFolders =  _folderServices.GetAllFolders();
+            return Ok(allFolders);
         }
         [HttpGet]
-        [Route("get-all-sub-folders-by-folder-Id")]
+        [Route("get-all-sub-folders-by-folder-name")]
         public IActionResult GetAllSubFoldersByFolderName(string folderPath)
         {
           var folders = _folderServices.GetAllSubFoldersByFolderName(folderPath);
            return Ok(folders);
         }
-       
+        [HttpGet]
+        [Route("rename-folder")]
+        public IActionResult RenameAllFolders(string FolderName, string FolderPath, string NewFolderName)
+        {
+            var Folder = _folderServices.RenameAllFolders(FolderName, FolderPath, NewFolderName);
+            return Ok(Folder);
+        }
+
+
+
 
 
     }

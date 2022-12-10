@@ -5,17 +5,17 @@ namespace Folder_Operations.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class FileContoller : ControllerBase
+    public class FileController : ControllerBase
     {
         public readonly IFileServices _fileServices;
 
-        public FileContoller(IFileServices fileServices)
+        public FileController(IFileServices fileServices)
         {
             _fileServices = fileServices;
         }
 
         [HttpPost]
-        [Route("create-files-by-folder-id")]
+        [Route("create-files-by-folder-Name")]
         public IActionResult CreateFilesByFolderName(string FolderName, string FileName)
         {
             if (FolderName != null)
@@ -32,8 +32,8 @@ namespace Folder_Operations.Controllers
             _fileServices.DeleteFiles(filePath);
             return Ok(filePath + "successfully deleted");
         }
-        [HttpPost]
-        [Route("delete-files-By-Folder-Name")]
+        [HttpDelete]
+        [Route("delete-all-files-By-Folder-Name")]
         public IActionResult DeleteAllFilesByFolderName(string folderName, string folderPath )
         {
             var fileNames = _fileServices.DeleteAllFilesByFolderName(folderName, folderPath);
@@ -41,7 +41,7 @@ namespace Folder_Operations.Controllers
         }
 
         [HttpGet]
-        [Route("get-all-files-by-folder-id")]
+        [Route("get-all-files-by-folder-Name")]
         public IActionResult GetAllFilesByFolderName(string folderName)
         {
             var files = _fileServices.GetAllFilesByFolderName(folderName);
@@ -49,7 +49,7 @@ namespace Folder_Operations.Controllers
         }
 
         [HttpGet]
-        [Route("get-all-content-by-file-Id")]
+        [Route("get-all-content-by-file-Name")]
         public IActionResult GetAllFileContentByFileName(string filepath)
         {
             var fileContent = _fileServices.GetAllFileContentByFilePath(filepath);

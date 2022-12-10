@@ -29,17 +29,20 @@ namespace Folder_Operations.Services
                 return (ex.Message);
             }
         }
-        public string CreateSubFoldersById(string FolderName, string SubFolderName)
+        public string CreateSubFoldersById(string FolderName, string newFolderName)
         {
             try
             {
-                var file = Directory.GetDirectories(rootPath, FolderName, SearchOption.AllDirectories).FirstOrDefault();
+
+                var createdFolder = Directory.CreateDirectory(Path.Combine(rootPath, FolderName));
+                var folderAddress = ((_httpContextAccessor.HttpContext.Request.IsHttps ? "https" : "http") + "://" + _httpContextAccessor.HttpContext.Request.Host + "/" + createdFolder.Name);
+                var CreatedFolder = Directory.GetDirectories(rootPath, FolderName, SearchOption.AllDirectories).FirstOrDefault();
                 if (FolderName == null)
                 {
                     return "Folder name does not exist";
                 }
-                Directory.CreateDirectory(Path.Combine(rootPath, file, SubFolderName));
-                return SubFolderName;
+                Directory.CreateDirectory(Path.Combine(CreatedFolder, newFolderName));
+                return newFolderName;
             }
             catch (Exception ex)
             {
